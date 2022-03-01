@@ -1,10 +1,37 @@
 You can see the previous work from:
 - https://github.com/Curt-Park/producer-consumer-fastapi-celery
-- https://github.com/Curt-Park/triton-inference-server-practice
+- https://github.com/Curt-Park/triton-inference-server-practice (00-quick-start)
 
 # Benchmark FastAPI + Celery with / without Triton
 <img width="844" alt="" src="https://user-images.githubusercontent.com/14961526/156115761-ed00f3ee-3bfe-4d48-aef5-77d9e8f4e28a.png">
 
+## Preparation
+
+#### 1. Setup packages
+Install [Anaconda](https://docs.anaconda.com/anaconda/install/index.html) and execute the following commands:
+```bash
+$ make env        # create a conda environment (need only once)
+$ source init.sh  # activate the env
+$ make setup      # setup packages (need only once)
+```
+
+#### 2. Train a CNN model (Recommended on GPU)
+```bash
+$ source create_model.sh
+```
+
+#### 3. Check the model repository created
+```bash
+$ tree model_repository
+
+model_repository
+└── mnist_cnn
+    ├── 1
+    │   └── model.pt
+    └── config.pbtxt
+
+2 directories, 2 files
+```
 
 ## How to play
 
@@ -12,10 +39,6 @@ You can see the previous work from:
 Install [Redis](https://redis.io/topics/quickstart), and run the following commands:
 
 ```bash
-$ make env        # create a conda environment (need only once)
-$ source init.sh  # activate the env
-$ make setup      # setup packages (need only once)
-$
 $ make broker     # run redis broker
 $ make worker     # run celery worker
 $ make api        # run fastapi server
