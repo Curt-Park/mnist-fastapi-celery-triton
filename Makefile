@@ -8,7 +8,7 @@ env:
 	conda create -n $(BASENAME)  python=$(PYTHON)
 
 setup:
-	conda install --file requirements.txt $(addprefix -c ,$(CONDA_CH))
+	conda install -y --file requirements.txt $(addprefix -c ,$(CONDA_CH))
 	pip install -r requirements-pip.txt  # separated for M1 chips
 
 ifeq ($(NVCC_USE),nvcc)

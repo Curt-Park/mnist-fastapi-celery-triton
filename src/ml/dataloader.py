@@ -9,10 +9,13 @@ from typing import Any, Dict, Tuple
 from torch.utils.data.dataloader import DataLoader
 from torchvision import datasets, transforms
 
+MEAN = 0.1307
+STD = 0.3081
+
 
 def get_preprocessor() -> transforms.Compose:
     """Get a preprocessor for mnist."""
-    transform_seq = [transforms.ToTensor(), transforms.Normalize((0.1307,), (0.3081,))]
+    transform_seq = [transforms.ToTensor(), transforms.Normalize((MEAN,), (STD,))]
     transform = transforms.Compose(transform_seq)
     return transform
 
