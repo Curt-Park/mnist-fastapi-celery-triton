@@ -51,13 +51,13 @@ class PredictorTriton:
         self.url = TRITON_SERVER_URL
         self.model_name = model_name
         self.client = httpclient.InferenceServerClient(url=self.url, verbose=True)
-        self.inputs = [httpclient.InferInput("input", input_shape, input_type)]
-        self.outputs = [httpclient.InferRequestedOutput("output", binary_data=False)]
+        self.inputs = [httpclient.InferInput("input__0", input_shape, input_type)]
+        self.outputs = [httpclient.InferRequestedOutput("output__0", binary_data=False)]
 
     def predict(self, image: torch.FloatTensor) -> int:
         """Predict a handwritten digit."""
         self.inputs[0].set_data_from_numpy(image.numpy(), binary_data=False)
         results = self.client.infer(self.model_name, self.inputs, outputs=self.outputs)
-        logits = results.get_response().as_numpy("output")
+        logits = results.get_response().as_numpy("output__0")
         prediction = logits.argmax()
         return int(prediction)
