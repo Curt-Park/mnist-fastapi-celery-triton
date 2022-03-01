@@ -4,13 +4,12 @@ import torch
 from PIL import Image
 
 from ml.dataloader import get_preprocessor
-from worker.predictor import Predictor, PredictorTriton
+from worker.predictor import BasePredictor, Predictor, PredictorTriton
 
 from .celery import app
 
 preprocess = get_preprocessor()
-predictor = Predictor()
-predictor_triton = PredictorTriton()
+predictors = {"NAIVE": BasePredictor(), "TRITON": PredictorTriton()}
 
 
 def get_image(image_name: str) -> torch.FloatTensor:
@@ -23,9 +22,15 @@ def get_image(image_name: str) -> torch.FloatTensor:
 @app.task
 def predict_digit(image_name: str) -> int:
     """Predict a handwritten digit image."""
+    # lazy init for sementation annotator
+    # celery doesn't support spawn, but pytorch only supports spawn
+    # https://github.com/celery/celery/issues/6036
+    if isinstance(predictors["NAIVE"], BasePredictor):
+        predictors["NAIVE"] = Predictor()
+
     try:
         image = get_image(image_name)
-        prediction = predictor.predict(image)
+        prediction = predictors["NAIVE"].predict(image)
     except FileNotFoundError:
         prediction = -1
     return prediction
@@ -36,7 +41,7 @@ def predict_digit_triton(image_name: str) -> int:
     """Predict a handwritten digit image with Triton."""
     try:
         image = get_image(image_name)
-        prediction = predictor_triton.predict(image)
+        prediction = predictors["TRITON"].predict(image)
     except FileNotFoundError:
         prediction = -1
     return prediction

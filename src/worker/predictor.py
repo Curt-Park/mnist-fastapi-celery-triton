@@ -2,7 +2,7 @@
 """Pretictors for handwritten digits recognition."""
 
 import os
-from typing import Optional, Tuple
+from typing import Tuple
 
 import torch
 import tritonclient.http as httpclient
@@ -11,34 +11,32 @@ MODEL_PATH = os.path.join("model_repository", "mnist_cnn", "1", "model.pt")
 TRITON_SERVER_URL = os.environ.get("TRITON_URL", "localhost:9000")
 
 
-class Predictor:
+class BasePredictor:
+    """Super class."""
+
+    def predict(self, _: torch.FloatTensor) -> int:
+        """Predict the digit."""
+        raise NotImplementedError
+
+
+class Predictor(BasePredictor):
     """Predictor that has a CNN model."""
 
     def __init__(self, model_path: str = MODEL_PATH) -> None:
         """Initialize."""
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = torch.jit.load(model_path, map_location=device)
+        self.model.eval()
         self.model_path = model_path
-        self.model: Optional[torch.nn.Module] = None
-
-    def _init_model(self) -> torch.nn.Module:
-        """Load torch script model."""
-        model = torch.jit.load(self.model_path, map_location=self.device)
-        model.eval()
-        return model
 
     def predict(self, image: torch.FloatTensor) -> int:
         """Predict a handwritten digit."""
-        # lazy init for sementation annotator
-        # celery doesn't support spawn, but pytorch only supports spawn
-        # https://github.com/celery/celery/issues/6036
-        if self.model is None:
-            self.model = self._init_model()
         logits = self.model(image)
         prediction = torch.argmax(logits).detach().cpu().item()
         return int(prediction)
 
 
-class PredictorTriton:
+class PredictorTriton(BasePredictor):
     """Predictor that has a CNN model."""
 
     def __init__(
