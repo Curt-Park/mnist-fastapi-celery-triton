@@ -1,0 +1,2 @@
+pytorch-gpu	    == 1.10.2
+cudatoolkit	    == 11.3.1

@@ -13,7 +13,7 @@ Install [Redis](https://redis.io/topics/quickstart), and run the following comma
 
 ```bash
 $ make env        # create a conda environment (need only once)
-$ conda activate producer-consumer-fastapi-celery  # activate the env
+$ source init.sh  # activate the env
 $ make setup      # setup packages (need only once)
 $
 $ make broker     # run redis broker
