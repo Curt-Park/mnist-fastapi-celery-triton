@@ -1,7 +1,7 @@
 name: "mnist_cnn"
 platform: "pytorch_libtorch"
-max_batch_size: 100
-dynamic_batching { preferred_batch_size: [ 50 ]}
+max_batch_size: 128
+dynamic_batching { }
 instance_group [
   {
     count: 1
