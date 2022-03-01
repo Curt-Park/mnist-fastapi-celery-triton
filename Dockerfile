@@ -1,14 +1,24 @@
-FROM python:3.9.10-slim-buster
+FROM nvidia/cuda:11.5.1-cudnn8-devel-ubuntu20.04
 
-WORKDIR /app
+ENV PATH="/root/miniconda3/bin:${PATH}"
+ARG PATH="/root/miniconda3/bin:${PATH}"
+RUN apt-get update \
+    && apt-get install -y wget \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y make
+RUN wget \
+    https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh \
+    && mkdir /root/.conda \
+    && bash Miniconda3-latest-Linux-x86_64.sh -b \
+    && rm -f Miniconda3-latest-Linux-x86_64.sh
+RUN conda --version
+RUN apt-get update && apt-get install -y \
+    make \
+    curl \
+    libgl1
 
-COPY ./requirements.txt .
-COPY ./requirements-pip.txt .
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-RUN pip install -r requirements-pip.txt
+RUN mkdir app
+WORKDIR app
+COPY ./ ./
 
-RUN useradd -u 8877 user
-USER user
+RUN make setup

@@ -47,7 +47,7 @@ $ make api        # run fastapi server
 $ make dashboard  # run dashboard that monitors celery
 ```
 
-#### Server (Option 2 - Docker Compose)
+#### Server (Option 2 - Docker Compose available on GPU devices)
 Install [Docker](https://docs.docker.com/engine/install/) & [Docker Compose](https://docs.docker.com/compose/install/),
 and run the following command:
 
@@ -59,9 +59,16 @@ $ docker-compose up
 You can start up additional workers on other devices.
 
 ```bash
-$ export BROKER_URL=redis://redis-broker-ip:6379
-$ export BACKEND_URL=redis://redis-backend-ip:6379
+$ export BROKER_URL=redis://redis-broker-ip:6379    # default is localhost
+$ export BACKEND_URL=redis://redis-backend-ip:6379  # default is localhost
+$ export BACKEND_URL=http://triton-server-ip:9000   # default is localhost
 $ make worker
+```
+
+#### [Optional] Additional Triton Servers
+You can start up additional Triton servers on other devices.
+
+```bash
 $ make triton
 ```
 

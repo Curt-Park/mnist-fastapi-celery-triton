@@ -6,6 +6,7 @@ from celery import Celery
 
 broker = os.environ.get("BROKER_URL", "redis://localhost:6379")
 backend = os.environ.get("BACKEND_URL", "redis://localhost:6379")
+triton = os.environ.get("TRITON_URL", "localhost:9000")
 
 
 app = Celery(

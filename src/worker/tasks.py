@@ -1,13 +1,17 @@
 # -*- coding: utf-8 -*-
 """Producer."""
-import time
-from random import randint
-
 from .celery import app
 
 
 @app.task
-def produce() -> int:
-    """Produce a random value."""
-    time.sleep(1)  # producing time
-    return randint(1, 100)
+def predict_digit(image_name: str) -> int:
+    """Predict a handwritten digit image."""
+    print(f"received {image_name}")
+    return 0
+
+
+@app.task
+def predict_digit_triton(image_name: str) -> int:
+    """Predict a handwritten digit image with Triton."""
+    print(f"received {image_name}")
+    return 0
