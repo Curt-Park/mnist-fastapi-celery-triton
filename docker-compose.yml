@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+
+  worker:
+    build: .
+    image: producer-consumer
+    command: make worker
+    volumes:
+      - .:/app
+    environment:
+      - BROKER_URL=redis://redis:6379/0
+      - BACKEND_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+
+  api:
+    build: .
+    image: producer-consumer
+    ports:
+      - 8000:8000
+    command: make api
+    volumes:
+      - .:/app
+    environment:
+      - BROKER_URL=redis://redis:6379/0
+      - BACKEND_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+      - worker
+
+  dashboard:
+    build: .
+    image: producer-consumer
+    ports:
+      - 5555:5555
+    command: make dashboard
+    volumes:
+      - .:/app
+    environment:
+      - BROKER_URL=redis://redis:6379/0
+      - BACKEND_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+      - worker
