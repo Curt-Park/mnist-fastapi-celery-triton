@@ -24,7 +24,7 @@ services:
       - 9002:8002
     command: tritonserver --model-repository=/models
     volumes:
-      - ./model_repository:/model_repository
+      - ./model_repository:/models
     deploy:
       resources:
         reservations:
