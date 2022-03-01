@@ -24,14 +24,14 @@ class Predictor(BasePredictor):
 
     def __init__(self, model_path: str = MODEL_PATH) -> None:
         """Initialize."""
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        self.model = torch.jit.load(model_path, map_location=device)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = torch.jit.load(model_path, map_location=self.device)
         self.model.eval()
         self.model_path = model_path
 
     def predict(self, image: torch.FloatTensor) -> int:
         """Predict a handwritten digit."""
-        logits = self.model(image)
+        logits = self.model(image.to(self.device))
         prediction = torch.argmax(logits).detach().cpu().item()
         return int(prediction)
 
