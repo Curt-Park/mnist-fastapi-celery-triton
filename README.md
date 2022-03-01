@@ -49,9 +49,9 @@ Install [Redis](https://redis.io/topics/quickstart) & [Docker](https://docs.dock
 and run the following commands:
 
 ```bash
+$ make triton     # run triton server
 $ make broker     # run redis broker
 $ make worker     # run celery worker
-$ make triton     # run triton server
 $ make api        # run fastapi server
 $ make dashboard  # run dashboard that monitors celery
 ```
@@ -64,21 +64,21 @@ and run the following command:
 $ docker-compose up
 ```
 
+#### [Optional] Additional Triton Servers
+You can start up additional Triton servers on other devices.
+
+```bash
+$ make triton
+```
+
 #### [Optional] Additional Workers
 You can start up additional workers on other devices.
 
 ```bash
 $ export BROKER_URL=redis://redis-broker-ip:6379    # default is localhost
 $ export BACKEND_URL=redis://redis-backend-ip:6379  # default is localhost
-$ export BACKEND_URL=http://triton-server-ip:9000   # default is localhost
+$ export TRITON_SERVER_URL=http://triton-server-ip:9000   # default is localhost
 $ make worker
-```
-
-#### [Optional] Additional Triton Servers
-You can start up additional Triton servers on other devices.
-
-```bash
-$ make triton
 ```
 
 #### Dashboard for Celery (Flower)
