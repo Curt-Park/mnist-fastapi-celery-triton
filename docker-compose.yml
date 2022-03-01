@@ -18,6 +18,7 @@ services:
 
   triton:
     image: nvcr.io/nvidia/tritonserver:22.02-py3
+    ipc: host
     ports:
       - 9000:8000
       - 9001:8001

@@ -29,7 +29,7 @@ worker:
 		celery -A worker.celery worker -P processes -c $(N_PROC) -l INFO
 
 triton:
-	docker run --gpus 1 --rm -p 9000:8000 -p 9001:8001 -p 9002:8002 \
+	docker run --gpus 1 --ipc host --rm -p 9000:8000 -p 9001:8001 -p 9002:8002 \
 		-v $(PWD)/model_repository:/models nvcr.io/nvidia/tritonserver:22.02-py3 \
 		tritonserver --model-repository=/models
 
