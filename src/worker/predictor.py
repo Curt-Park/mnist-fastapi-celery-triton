@@ -56,6 +56,7 @@ class PredictorTriton(BasePredictor):
         """Predict a handwritten digit."""
         self.inputs[0].set_data_from_numpy(image.numpy(), binary_data=False)
         results = self.client.infer(self.model_name, self.inputs, outputs=self.outputs)
-        logits = results.get_response().as_numpy("output__0")
-        prediction = logits.argmax()
+        _ = results.get_response()
+        output = results.as_numpy("output__0")
+        prediction = output.argmax()
         return int(prediction)
