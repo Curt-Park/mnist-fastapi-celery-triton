@@ -22,7 +22,7 @@ def get_image(image_name: str) -> torch.FloatTensor:
 @app.task
 def predict_digit(image_name: str) -> int:
     """Predict a handwritten digit image."""
-    # lazy init for sementation annotator
+    # lazy init for mnist classifier.
     # celery doesn't support spawn, but pytorch only supports spawn
     # https://github.com/celery/celery/issues/6036
     if isinstance(predictors["NAIVE"], BasePredictor):
