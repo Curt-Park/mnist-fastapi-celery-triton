@@ -16,7 +16,7 @@ ifeq ($(NVCC_USE),nvcc)
 endif
 
 broker:
-	redis-server
+	redis-server --protected-mode no
 
 worker:
 	# auto-restart for script modifications
