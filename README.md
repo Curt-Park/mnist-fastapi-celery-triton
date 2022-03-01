@@ -88,7 +88,7 @@ $ make load-triton  # for  load test with Triton
 #### Open http://0.0.0.0:8089
 Type url for the API server.
 
-TBD
+<img width="1272" alt="" src="https://user-images.githubusercontent.com/14961526/156191413-be5a4366-c90b-4ceb-99ce-3f4c978f709c.png">
 
 
 ## Issue Handling
