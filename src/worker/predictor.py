@@ -44,11 +44,12 @@ class PredictorTriton(BasePredictor):
         model_name: str = "mnist_cnn",
         input_shape: Tuple[int, ...] = (1, 1, 28, 28),
         input_type: str = "FP32",
+        verbose: bool = False,
     ) -> None:
         """Initialize."""
         self.url = TRITON_SERVER_URL
         self.model_name = model_name
-        self.client = httpclient.InferenceServerClient(url=self.url, verbose=True)
+        self.client = httpclient.InferenceServerClient(url=self.url, verbose=verbose)
         self.inputs = [httpclient.InferInput("input__0", input_shape, input_type)]
         self.outputs = [httpclient.InferRequestedOutput("output__0", binary_data=False)]
 
