@@ -5,10 +5,10 @@ You can see the previous work from:
 # Benchmark FastAPI + Celery with / without Triton
 
 ## with Triton Server
-<img width="844" alt="" src="https://user-images.githubusercontent.com/14961526/156115761-ed00f3ee-3bfe-4d48-aef5-77d9e8f4e28a.png">
+<img width="812" alt="" src="https://user-images.githubusercontent.com/14961526/156224708-9662b513-8faa-47be-b1eb-1564b1bcf4f8.png">
 
 ## without Triton Server
-<img width="845" alt="" src="https://user-images.githubusercontent.com/14961526/156193059-ac1fac41-9d85-438e-997d-b608c3a01251.png">
+<img width="823" alt="" src="https://user-images.githubusercontent.com/14961526/156224736-10e8ba23-3595-42ec-869c-cecc8c2f928c.png">
 
 ## Benchmark Results
 See [Benchmark Results](/benchmark)
