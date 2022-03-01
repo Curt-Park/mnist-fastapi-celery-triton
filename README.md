@@ -36,11 +36,13 @@ model_repository
 ## How to play
 
 #### Server (Option 1 - On your Local)
-Install [Redis](https://redis.io/topics/quickstart), and run the following commands:
+Install [Redis](https://redis.io/topics/quickstart) & [Docker](https://docs.docker.com/engine/install/),
+and run the following commands:
 
 ```bash
 $ make broker     # run redis broker
 $ make worker     # run celery worker
+$ make triton     # run triton server
 $ make api        # run fastapi server
 $ make dashboard  # run dashboard that monitors celery
 ```
@@ -60,23 +62,15 @@ You can start up additional workers on other devices.
 $ export BROKER_URL=redis://redis-broker-ip:6379
 $ export BACKEND_URL=redis://redis-backend-ip:6379
 $ make worker
-```
-
-#### Client
-
-#### Option 1: In WebBrowser
-http://0.0.0.0:8000/produce
-
-#### Option 2: Test Client
-Sending a number of requests simultaneously.
-
-```bash
-$ python src/client.py --n-req [N_REQUSTS]
+$ make triton
 ```
 
 #### Dashboard for Celery (Flower)
 http://0.0.0.0:5555/
 ![image](https://user-images.githubusercontent.com/14961526/154842930-70c54154-cf94-4368-bd46-fa43bd232d35.png)
+
+## Load Test (w/ Locust)
+TBD
 
 
 ## Issue Handling

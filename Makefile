@@ -1,6 +1,6 @@
 PYTHON=3.9
 N_PROC=8
-CONDA_CH=conda-forge defaults
+CONDA_CH=defaults conda-forge pytorch
 BASENAME=$(shell basename $(CURDIR))
 NVCC_USE=$(notdir $(shell which nvcc 2> NULL))
 
@@ -25,6 +25,11 @@ worker:
 		--pattern=*.py \
 		--recursive -- \
 		celery -A worker.celery worker -P processes -c $(N_PROC) -l INFO
+
+triton:
+	docker run --gpus 1 --rm -p 9000:8000 -p 9001:8001 -p 9002:8002 \
+		-v $(pwd)/model_repository:/models nvcr.io/nvidia/tritonserver:22.02-py3 \
+		tritonserver --model-repository=/models
 
 api:
 	PYTHONPATH=src uvicorn api.server:app --reload --host 0.0.0.0 --port 8000

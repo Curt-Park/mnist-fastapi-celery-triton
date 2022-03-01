@@ -16,6 +16,21 @@ services:
       - BROKER_URL=redis://redis:6379/0
       - BACKEND_URL=redis://redis:6379/0
 
+  triton:
+    image: nvcr.io/nvidia/tritonserver:22.02-py3
+    ports:
+      - 9000:8000
+      - 9001:8001
+      - 9002:8002
+    command: tritonserver --model-repository=/models
+    volumes:
+      - model_repository:/model_repository
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
   api:
     build: .
     image: triton-benchmark
