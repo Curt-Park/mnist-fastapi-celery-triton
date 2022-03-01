@@ -2,7 +2,7 @@ You can see the previous work from:
 - https://github.com/Curt-Park/producer-consumer-fastapi-celery
 - https://github.com/Curt-Park/triton-inference-server-practice
 
-# MNIST Benchmark FastAPI and Celery with / without Triton
+# Benchmark FastAPI + Celery with / without Triton
 <img width="1860" alt="" src="https://user-images.githubusercontent.com/14961526/154876820-52182eab-4295-42e5-960c-19ede6d5fff5.png">
 
 ## How to play
