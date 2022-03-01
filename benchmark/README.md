@@ -12,6 +12,8 @@
 
 - **Average, Min, Max**: Lower is better
 - **RPS**: Higher is better
+- Triton consumes around 1.3GB gpu memory
+- Non-Triton consumes around 1.2GB x 10 gpu memory (10 processes)
 
 ## Peak Concurrency = 1
 Approximately 1,000 requests sent.
