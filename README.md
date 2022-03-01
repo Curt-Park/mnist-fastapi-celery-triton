@@ -3,7 +3,13 @@ You can see the previous work from:
 - https://github.com/Curt-Park/triton-inference-server-practice (00-quick-start)
 
 # Benchmark FastAPI + Celery with / without Triton
+
+## with Triton Server
 <img width="844" alt="" src="https://user-images.githubusercontent.com/14961526/156115761-ed00f3ee-3bfe-4d48-aef5-77d9e8f4e28a.png">
+
+## without Triton Server
+<img width="845" alt="" src="https://user-images.githubusercontent.com/14961526/156193059-ac1fac41-9d85-438e-997d-b608c3a01251.png">
+
 
 ## Preparation
 
