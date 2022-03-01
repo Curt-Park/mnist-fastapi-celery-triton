@@ -10,6 +10,9 @@ You can see the previous work from:
 ## without Triton Server
 <img width="845" alt="" src="https://user-images.githubusercontent.com/14961526/156193059-ac1fac41-9d85-438e-997d-b608c3a01251.png">
 
+## Benchmark Results
+See [Benchmark Results](/benchmark)
+
 
 ## Preparation
 
