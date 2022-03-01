@@ -10,6 +10,9 @@
 
 # Experimental Results
 
+- **Average, Min, Max**: Lower is better
+- **RPS**: Higher is better
+
 ## Peak Concurrency = 1
 Approximately 1,000 requests sent.
 
