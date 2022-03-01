@@ -11,30 +11,50 @@
 # Experimental Results
 
 ## Peak Concurrency = 1
+Approximately 1,000 requests sent.
+
 | Name | Average (ms)  | Min (ms)  |  Max (ms) | RPS (Range)  |
 |:---:|:---:|:---:|:---:|:---:|
 | without Triton  | 57  |  38 | 320  |  16 ~ 18 |
 | with  Triton  |   |   |   |   |
 
 #### without Triton Server
-<img width="1268" alt="스크린샷 2022-03-02 오전 12 20 44" src="https://user-images.githubusercontent.com/14961526/156196352-e568fc57-f60b-46de-a3bd-9df692ffc842.png">
-<img width="1254" alt="스크린샷 2022-03-02 오전 12 21 05" src="https://user-images.githubusercontent.com/14961526/156196414-8023281b-6ffc-4635-b5bd-8ad63bf7f0b1.png">
+<img width="1268" alt="" src="https://user-images.githubusercontent.com/14961526/156196352-e568fc57-f60b-46de-a3bd-9df692ffc842.png">
+<img width="1254" alt="" src="https://user-images.githubusercontent.com/14961526/156196414-8023281b-6ffc-4635-b5bd-8ad63bf7f0b1.png">
 
 #### with Triton Server
 TBD
 
 ## Peak Concurrency = 10
+Approximately 4,000 requests sent.
+
+| Name | Average (ms)  | Min (ms)  |  Max (ms) | RPS (Range)  |
+|:---:|:---:|:---:|:---:|:---:|
+| without Triton  | 165  |  46 | 4863  |  59 ~ 61 |
+| with  Triton  |   |   |   |   |
 
 #### without Triton Server
-TBD
+<img width="1269" alt="" src="https://user-images.githubusercontent.com/14961526/156197902-d4d67282-07b6-456b-842d-499e15013b0f.png">
+
+See `Run #3`.
+<img width="1253" alt="" src="https://user-images.githubusercontent.com/14961526/156198107-3cd13b44-ae53-4a41-9983-fbe8c61dc816.png">
 
 #### with Triton Server
 TBD
 
 ## Peak Concurrency = 30
+Approximately 10,000 requests sent.
+
+| Name | Average (ms)  | Min (ms)  |  Max (ms) | RPS (Range)  |
+|:---:|:---:|:---:|:---:|:---:|
+| without Triton  | 483  |  164 | 634  |  58 ~ 61 |
+| with  Triton  |   |   |   |   |
 
 #### without Triton Server
-TBD
+<img width="1272" alt="" src="https://user-images.githubusercontent.com/14961526/156198749-8754d262-8583-4cd9-bd19-c9dd4a2cf4cb.png">
+
+See `Run #4`.
+<img width="1253" alt="" src="https://user-images.githubusercontent.com/14961526/156198820-85efeba2-ad27-46a9-8d27-b14f0aefb7ae.png">
 
 #### with Triton Server
 TBD
