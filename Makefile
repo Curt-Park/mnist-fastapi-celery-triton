@@ -4,6 +4,7 @@ CONDA_CH=defaults conda-forge pytorch
 BASENAME=$(shell basename $(CURDIR))
 NVCC_USE=$(notdir $(shell which nvcc 2> NULL))
 
+# setup
 env:
 	conda create -n $(BASENAME)  python=$(PYTHON)
 
@@ -18,6 +19,7 @@ endif
 broker:
 	redis-server --protected-mode no
 
+# services
 worker:
 	# auto-restart for script modifications
 	PYTHONPATH=src watchmedo auto-restart \
@@ -38,8 +40,15 @@ dashboard:
 	sh -c "./wait_for_workers.sh"
 	PYTHONPATH=src celery -A worker.celery flower --port=5555
 
+# load tests
+load:
+	locust -f test/ltest/locustfile.py MnistPredictionUser
 
-# For developers
+load-triton:
+	locust -f test/ltest/locustfile.py MnistPredictionTritonUser
+
+
+# for developers
 setup-dev:
 	conda install --file requirements-dev.txt $(addprefix -c ,$(CONDA_CH))
 	pre-commit install

@@ -1,3 +1,4 @@
 tritonclient[http]
 redis   == 4.1.4
 flower  == 1.0.0
+locust  == 2.8.3

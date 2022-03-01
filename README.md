@@ -77,6 +77,17 @@ http://0.0.0.0:5555/
 ![image](https://user-images.githubusercontent.com/14961526/154842930-70c54154-cf94-4368-bd46-fa43bd232d35.png)
 
 ## Load Test (w/ Locust)
+
+#### Execute Locust
+```bash
+$ make load  # for load test without Triton
+or
+$ make load-triton  # for  load test with Triton
+```
+
+#### Open http://0.0.0.0:8089
+Type url for the API server.
+
 TBD
 
 
