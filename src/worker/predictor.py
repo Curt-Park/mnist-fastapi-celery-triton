@@ -2,13 +2,18 @@
 """Pretictors for handwritten digits recognition."""
 
 import os
+from sys import platform
 from typing import Tuple
 
 import numpy as np
 import torch
 import tritonclient.http as httpclient
-import tritonclient.utils.shared_memory as shm
 from tritonclient import utils
+from tritonclient.utils import InferenceServerException
+
+if "linux" in platform:
+    # pylint: disable=no-name-in-module, import-error
+    import tritonclient.utils.shared_memory as shm
 
 MODEL_PATH = os.path.join("model_repository", "mnist_cnn", "1", "model.pt")
 TRITON_SERVER_URL = os.environ.get("TRITON_URL", "localhost:9000")
@@ -41,6 +46,47 @@ class Predictor(BasePredictor):
 
 class PredictorTriton(BasePredictor):
     """Predictor that has a CNN model."""
+
+    def __init__(
+        self,
+        model_name: str = "mnist_cnn",
+        input_info: Tuple[str, Tuple[int, ...]] = ("input__0", (1, 1, 28, 28)),
+        output_name: str = "output__0",
+        type_name: str = "FP32",
+    ) -> None:
+        """Initialize."""
+        self.url = TRITON_SERVER_URL
+        self.model_name = model_name
+        input_name, input_shape = input_info
+        self.output_name = output_name
+
+        self.client = httpclient.InferenceServerClient(url=self.url, verbose=False)
+        self.inputs = [httpclient.InferInput(input_name, input_shape, type_name)]
+        self.outputs = [httpclient.InferRequestedOutput(output_name, binary_data=False)]
+
+    def predict(self, image: torch.FloatTensor) -> int:
+        """Predict a handwritten digit."""
+        try:
+            self.inputs[0].set_data_from_numpy(image.numpy(), binary_data=False)
+            results = self.client.infer(
+                self.model_name, self.inputs, outputs=self.outputs
+            )
+            _ = results.get_response()  # wait for the response
+            output = results.as_numpy(self.output_name)
+            prediction = output.argmax()
+
+        except InferenceServerException:
+            return -1
+
+        return int(prediction)
+
+
+class PredictorTritonShm(BasePredictor):
+    """Predictor that has a CNN model (with SharedMemory).
+
+    Note:
+        This class is only available on Linux
+    """
 
     def __init__(
         self,

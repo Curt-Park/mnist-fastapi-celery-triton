@@ -8,6 +8,10 @@ from worker.predictor import BasePredictor, Predictor, PredictorTriton
 
 from .celery import app
 
+# only available on linux
+# from worker.predictor import PredictorTritonShm
+
+
 preprocess = get_preprocessor()
 predictors = {"NAIVE": BasePredictor(), "TRITON": PredictorTriton()}
 
