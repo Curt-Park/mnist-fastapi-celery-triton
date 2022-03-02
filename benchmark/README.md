@@ -45,7 +45,7 @@ Approximately 4,000 requests sent.
 | with  Triton  | 159  | 32  |  448 |
 | with  Triton (+ shared memory)  | 160  | 37  | 339  |
 
-* `without Triton` shows latency on max response time due to lazy initialization. It becomes faster alike Triton at later tries.
+* `without Triton` shows latency on max response time due to lazy initialization. It becomes faster alike `with Triton` at later tries.
 
 #### without Triton Server
 <img width="1269" alt="" src="https://user-images.githubusercontent.com/14961526/156197902-d4d67282-07b6-456b-842d-499e15013b0f.png">
