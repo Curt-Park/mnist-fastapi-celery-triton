@@ -16,7 +16,7 @@ if "linux" in platform:
     import tritonclient.utils.shared_memory as shm
 
 MODEL_PATH = os.path.join("model_repository", "mnist_cnn", "1", "model.pt")
-TRITON_SERVER_URL = os.environ.get("TRITON_URL", "localhost:9000")
+TRITON_SERVER_URL = os.environ.get("TRITON_SERVER_URL", "localhost:9000")
 
 
 class BasePredictor:
