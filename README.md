@@ -77,7 +77,7 @@ You can start up additional workers on other devices.
 ```bash
 $ export BROKER_URL=redis://redis-broker-ip:6379    # default is localhost
 $ export BACKEND_URL=redis://redis-backend-ip:6379  # default is localhost
-$ export TRITON_SERVER_URL=http://triton-server-ip:9000   # default is localhost
+$ export TRITON_SERVER_URL=triton-server-ip:9000   # default is localhost
 $ make worker
 ```
 
