@@ -3,7 +3,7 @@
 import torch
 from PIL import Image
 
-from ml.dataloader import get_preprocessor
+from ml.dataloader import get_preprocessor_train
 from worker.predictor import BasePredictor, Predictor, PredictorTriton
 
 from .celery import app
@@ -12,7 +12,7 @@ from .celery import app
 # from worker.predictor import PredictorTritonShm
 
 
-preprocess = get_preprocessor()
+preprocess = get_preprocessor_train()  # not to cache requests
 predictors = {"NAIVE": BasePredictor(), "TRITON": PredictorTriton()}
 
 

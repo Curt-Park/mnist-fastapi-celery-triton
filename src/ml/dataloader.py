@@ -13,8 +13,19 @@ MEAN = 0.1307
 STD = 0.3081
 
 
-def get_preprocessor() -> transforms.Compose:
+def get_preprocessor_train() -> transforms.Compose:
     """Get a preprocessor for mnist."""
+    transform_seq = [
+        transforms.RandAugment(),
+        transforms.ToTensor(),
+        transforms.Normalize((MEAN,), (STD,)),
+    ]
+    transform = transforms.Compose(transform_seq)
+    return transform
+
+
+def get_preprocessor_test() -> transforms.Compose:
+    """Get a preprocessor for test for mnist."""
     transform_seq = [transforms.ToTensor(), transforms.Normalize((MEAN,), (STD,))]
     transform = transforms.Compose(transform_seq)
     return transform
@@ -32,10 +43,13 @@ def get_dataloaders(
     test_kwargs.update(cuda_kwargs if use_cuda else {})
 
     # set dataset loaders
-    transform = get_preprocessor()
+    transform_train = get_preprocessor_train()
+    transform_test = get_preprocessor_test()
     data_path = "../../data"
-    dataset1 = datasets.MNIST(data_path, train=True, download=True, transform=transform)
-    dataset2 = datasets.MNIST(data_path, train=False, transform=transform)
+    dataset1 = datasets.MNIST(
+        data_path, train=True, download=True, transform=transform_train
+    )
+    dataset2 = datasets.MNIST(data_path, train=False, transform=transform_test)
     train_loader = DataLoader(dataset1, **train_kwargs)
     test_loader = DataLoader(dataset2, **test_kwargs)
 
