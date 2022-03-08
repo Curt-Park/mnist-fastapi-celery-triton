@@ -15,6 +15,7 @@ services:
     environment:
       - BROKER_URL=redis://redis:6379/0
       - BACKEND_URL=redis://redis:6379/0
+      - TRITON_SERVER_URL=triton:8000
 
   triton:
     image: nvcr.io/nvidia/tritonserver:22.02-py3
