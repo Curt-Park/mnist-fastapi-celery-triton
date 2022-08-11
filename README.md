@@ -1,4 +1,7 @@
-You can see the previous work from:
+Follow-up work:
+- https://github.com/Curt-Park/mnist-fastapi-aio-triton
+
+You can also see the previous work from:
 - https://github.com/Curt-Park/producer-consumer-fastapi-celery
 - https://github.com/Curt-Park/triton-inference-server-practice (00-quick-start)
 
